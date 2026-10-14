@@ -509,10 +509,6 @@ h1 {
   width: 100%;
   height: min(680px, 76vh);
   min-height: 560px;
-  perspective: 1100px;
-  transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
-  transform-style: preserve-3d;
-  transition: transform .16s ease-out;
   overflow: clip;
 }
 
@@ -588,15 +584,19 @@ h1 {
   position: absolute;
   z-index: 3;
   min-width: 92px;
-  padding: 12px 15px;
+  min-height: 42px;
+  padding: 0 15px;
   border: 1px solid var(--line-strong);
   border-radius: 999px;
   background: color-mix(in srgb, var(--surface) 80%, transparent);
   box-shadow: 0 16px 40px -24px var(--primary), inset 0 1px rgba(255, 255, 255, .06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   text-transform: uppercase;
-  transform: translate(-50%, -50%) translateZ(var(--z, 0px));
-  backdrop-filter: blur(14px);
+  transform: translate(-50%, -50%);
   transition: border-color .3s ease, box-shadow .3s ease;
 }
 
@@ -620,17 +620,19 @@ h1 {
 
 .system-node span {
   display: block;
-  font: 700 .74rem/1 "Bricolage Grotesque", sans-serif;
+  color: var(--text);
+  font: 600 .75rem/1 "Bricolage Grotesque", sans-serif;
   letter-spacing: .1em;
-  animation: node-breathe 5s ease-in-out infinite alternate;
 }
 
 .system-node small {
   display: block;
-  margin-top: 7px;
-  color: var(--muted);
-  font-size: .56rem;
-  letter-spacing: .1em;
+  margin-top: 6px;
+  color: color-mix(in srgb, var(--text) 74%, transparent);
+  font-size: .58rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: .08em;
 }
 
 .node-business { top: 12.8%; left: 50%; --z: 26px; }
@@ -640,7 +642,8 @@ h1 {
   top: 50%;
   left: 50%;
   min-width: 164px;
-  padding: 19px 21px;
+  min-height: 86px;
+  padding: 0 21px;
   border-color: color-mix(in srgb, var(--cyan) 55%, var(--line));
   border-radius: 28px;
   background: linear-gradient(145deg, color-mix(in srgb, var(--primary) 24%, var(--surface)), color-mix(in srgb, var(--cyan) 12%, var(--surface)));
@@ -649,11 +652,11 @@ h1 {
 }
 .node-core::before { left: 50%; top: -5px; translate: -50% 0; background: var(--warm); box-shadow: 0 0 18px var(--warm); }
 .node-core span {
-  font-size: .72rem;
+  font-size: .78rem;
   letter-spacing: .075em;
   white-space: nowrap;
 }
-.node-core small { font-size: .52rem; }
+.node-core small { font-size: .58rem; }
 .node-data { top: 73.4%; left: 22%; --z: 38px; }
 .node-ai { top: 72.8%; left: 81%; --z: 22px; }
 .node-tech { top: 87.8%; left: 50%; --z: 34px; }
@@ -2348,10 +2351,6 @@ footer {
 
 @keyframes signal-flow {
   to { stroke-dashoffset: -1; }
-}
-
-@keyframes node-breathe {
-  to { opacity: .72; translate: 0 -2px; }
 }
 
 @keyframes marquee {

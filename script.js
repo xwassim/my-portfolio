@@ -278,7 +278,11 @@ const P = [
     featuredOrder: 1,
     accent: '#6977ff',
     media: [
-      { src: 'assets/pgdi-login.png', alt: bi('PGDI intelligent document management login screen with workflow metrics', 'Écran de connexion PGDI avec métriques de workflows documentaires'), fit: 'contain', position: 'center', width: 1916, height: 906 }
+      { src: 'assets/pgdi/login_white.png', alt: bi('PGDI intelligent document management, login screen', 'Écran de connexion PGDI avec métriques de workflows documentaires'), fit: 'contain', position: 'center', width: 1916, height: 906 },
+      { src: 'assets/pgdi/cma1.png', alt: bi('PGDI intelligent document management, demand choice page', 'Écran de choix de types de la demande CMA'), fit: 'contain', position: 'center', width: 1916, height: 906 },
+      { src: 'assets/pgdi/cmaFinal.png', alt: bi('PGDI intelligent document management, document finalization page', 'Écran de finalisation et de depot du document'), fit: 'contain', position: 'center', width: 1916, height: 906 },
+      { src: 'assets/pgdi/adminGED.png', alt: bi('PGDI intelligent document management, document management page', 'Écran de gestion de la GED'), fit: 'contain', position: 'center', width: 1916, height: 906 },
+      { src: 'assets/pgdi/chatbot1.png', alt: bi('PGDI intelligent document management, chatbot page', 'Écran d\'interogation du chatbot'), fit: 'contain', position: 'center', width: 1916, height: 906 }
     ],
     technologies: ['Information systems', 'Workflow design', 'RAG', 'Document lifecycle', 'Access control'],
     summary: bi('Document management, governed workflows and intelligent search in one enterprise platform.', 'Gestion documentaire, workflows gouvernés et recherche intelligente dans une même plateforme d’entreprise.'),
@@ -328,8 +332,13 @@ const P = [
     featuredOrder: 3,
     accent: '#4d67ff',
     media: [
-      { src: 'assets/woms2.png', alt: bi('WOMS drilling-site operations list', 'Liste opérationnelle des sites de forage dans WOMS'), fit: 'contain', position: 'center', width: 742, height: 515 },
-      { src: 'assets/woms1.png', alt: bi('WOMS cost and delay monitoring dashboard', 'Tableau de bord WOMS de suivi des coûts et délais'), fit: 'contain', position: 'center', width: 583, height: 417 }
+      { src: 'assets/woms/woms1.png', alt: bi('WOMS drilling-site operations list', 'Liste opérationnelle des sites de forage dans WOMS'), fit: 'contain', position: 'center', width: 1370, height: 890 },
+      { src: 'assets/woms/woms2.png', alt: bi('WOMS cost and delay monitoring dashboard', 'Tableau de bord WOMS de suivi des coûts et délais'), fit: 'contain', position: 'center', width: 583, height: 417 },
+      { src: 'assets/woms/woms5.png', alt: bi('WOMS cost and delay monitoring dashboard', 'Tableau de bord WOMS de suivi des coûts et délais'), fit: 'contain', position: 'center', width: 583, height: 417 },
+      { src: 'assets/woms/woms3.png', alt: bi('WOMS cost and delay monitoring dashboard', 'Tableau de bord WOMS de suivi des coûts et délais'), fit: 'contain', position: 'center', width: 583, height: 417 },
+      { src: 'assets/woms/woms4.png', alt: bi('WOMS cost and delay monitoring dashboard', 'Tableau de bord WOMS de suivi des coûts et délais'), fit: 'contain', position: 'center', width: 583, height: 417 }
+      
+
     ],
     technologies: [],
     summary: bi('An operational flow that moves from drilling-site status to cost and schedule decisions.', 'Un parcours opérationnel qui passe du statut des sites de forage aux décisions sur les coûts et délais.'),
@@ -354,8 +363,11 @@ const P = [
     featuredOrder: 4,
     accent: '#3b8fe0',
     media: [
-      { src: 'assets/wakalati1.png', alt: bi('Wakalati water-utility customer portal login', 'Connexion au portail client Wakalati'), fit: 'cover', position: 'center', width: 1370, height: 890 },
-      { src: 'assets/wakalati2.png', alt: bi('Wakalati water distribution map', 'Carte du programme de distribution d’eau Wakalati'), fit: 'contain', position: 'center', width: 870, height: 780 }
+      { src: 'assets/wakalati/w1.png', alt: bi('Wakalati water-utility customer portal login', 'Connexion au portail client Wakalati'), fit: 'cover', position: 'center', width: 1370, height: 890 },
+      { src: 'assets/wakalati/w2.png', alt: bi('Wakalati water distribution map', 'Carte du programme de distribution d’eau Wakalati'), fit: 'contain', position: 'center', width: 870, height: 780 },
+      { src: 'assets/wakalati/w3.png', alt: bi('Wakalati water-utility customer portal services', 'Services du portail client Wakalati'), fit: 'contain', position: 'center', width: 870, height: 780 },
+      { src: 'assets/wakalati/w4.png', alt: bi('Wakalati water-utility customer portal account overview', 'Vue d’ensemble du compte client Wakalati'), fit: 'contain', position: 'center', width: 870, height: 780 },
+      { src: 'assets/wakalati/w5.png', alt: bi('Wakalati water-utility customer portal service details', 'Détails d’un service du portail client Wakalati'), fit: 'contain', position: 'center', width: 870, height: 780 }
     ],
     technologies: ['UI / UX', 'Customer portal', 'Service design', 'Data visualization'],
     summary: bi('A utility customer portal bringing service information, account access and distribution visibility together.', 'Un portail client qui réunit services, accès au compte et visibilité sur la distribution d’eau.'),
@@ -379,7 +391,7 @@ const P = [
     featured: false,
     accent: '#2fd5ff',
     media: [
-      { src: 'assets/pch.png', alt: bi('Configurable PCH purchase-order editor', 'Éditeur configurable de bons de commande PCH'), fit: 'contain', position: 'top', width: 648, height: 366 }
+      { src: 'assets/pch/pch.png', alt: bi('Configurable PCH purchase-order editor', 'Éditeur configurable de bons de commande PCH'), fit: 'contain', position: 'top', width: 648, height: 366 }
     ],
     technologies: ['Oracle', 'PHP', 'PDF automation', 'Dynamic forms'],
     summary: bi('A configurable tool generating standardized supplier purchase-order PDFs from Oracle data.', 'Un outil configurable qui génère des bons de commande fournisseurs PDF standardisés à partir de données Oracle.'),
@@ -401,8 +413,13 @@ const P = [
     featured: false,
     accent: '#ff714d',
     media: [
-      { src: 'assets/foodash2.png', alt: bi('FooDash restaurant discovery home screen', 'Écran d’accueil et découverte de restaurants FooDash'), fit: 'contain', position: 'top', width: 325, height: 673 },
-      { src: 'assets/foodash1.png', alt: bi('FooDash mobile sign-in screen', 'Écran de connexion mobile FooDash'), fit: 'contain', position: 'top', width: 316, height: 677 }
+      { src: 'assets/foodash/foodash1.png', alt: bi('FooDash restaurant discovery home screen', 'Écran d’accueil et découverte de restaurants FooDash'), fit: 'contain', position: 'top', width: 325, height: 673 },
+      { src: 'assets/foodash/fd2.png', alt: bi('FooDash mobile sign-in screen', 'Écran de connexion mobile FooDash'), fit: 'contain', position: 'top', width: 316, height: 677 },
+      { src: 'assets/foodash/foodash2.png', alt: bi('FooDash restaurant menu and cart interface', 'Interface de menu et panier FooDash'), fit: 'contain', position: 'top', width: 325, height: 673 },
+      { src: 'assets/foodash/fd3.png', alt: bi('FooDash order tracking and delivery interface', 'Interface de suivi de commande et livraison FooDash'), fit: 'contain', position: 'top', width: 325, height: 673 },
+      { src: 'assets/foodash/fd4.png', alt: bi('FooDash restaurant review interface', 'Interface d’avis sur les restaurants FooDash'), fit: 'contain', position: 'top', width: 325, height: 673 },
+      { src: 'assets/foodash/fd5.png', alt: bi('FooDash restaurant discovery and menu interface', 'Interface de découverte et menu de restaurants FooDash'), fit: 'contain', position: 'top', width: 325, height: 673 },
+      { src: 'assets/foodash/fd6.png', alt: bi('FooDash restaurant discovery and menu interface', 'Interface de découverte et menu de restaurants FooDash'), fit: 'contain', position: 'top', width: 325, height: 673 }
     ],
     technologies: ['Kotlin', 'Jetpack Compose', 'Strapi', 'Mobile UX'],
     summary: bi('A food-delivery app covering discovery, menus, cart, orders, delivery and reviews.', 'Une app de livraison de repas couvrant découverte, menus, panier, commandes, livraison et avis.'),
@@ -412,7 +429,7 @@ const P = [
     solution: bi('A Compose-based interface structured around familiar discovery and order patterns.', 'Une interface Compose structurée autour de repères familiers de découverte et de commande.'),
     highlights: [bi('End-to-end mobile journey', 'Parcours mobile de bout en bout'), bi('Restaurant discovery', 'Découverte de restaurants'), bi('Ordering flow', 'Parcours de commande')],
     liveUrl: null,
-    repoUrl: null
+    repoUrl: 'https://github.com/xwassim/FooDash-FoodDeliveryApp'
   },
   {
     id: 'jawla',
@@ -424,8 +441,12 @@ const P = [
     featured: false,
     accent: '#82d9c1',
     media: [
-      { src: 'assets/travel1.png', alt: bi('Jawla travel app welcome screen', 'Écran d’accueil de l’application de voyage Jawla'), fit: 'contain', position: 'top', width: 393, height: 851 },
-      { src: 'assets/travel2.png', alt: bi('Jawla destination discovery and itinerary interface', 'Interface Jawla de découverte de destinations et itinéraires'), fit: 'contain', position: 'top', width: 393, height: 1906 }
+      { src: 'assets/tafrara/travel1.png', alt: bi('Jawla travel app welcome screen', 'Écran d’accueil de l’application de voyage Jawla'), fit: 'contain', position: 'top', width: 393, height: 851 },
+      { src: 'assets/tafrara/travel0.png', alt: bi('Jawla destination discovery and itinerary interface', 'Interface Jawla de découverte de destinations et itinéraires'), fit: 'contain', position: 'top', width: 393, height: 1906 },
+      { src: 'assets/tafrara/travel2.png', alt: bi('Jawla travel app itinerary and map interface', 'Interface Jawla d’itinéraire et carte de voyage'), fit: 'contain', position: 'top', width: 393, height: 1906 },
+      { src: 'assets/tafrara/travel3.png', alt: bi('Jawla travel app community forum interface', 'Interface Jawla de forum communautaire'), fit: 'contain', position: 'top', width: 393, height: 1906 },
+      { src: 'assets/tafrara/travel4.png', alt: bi('Jawla travel app community forum interface', 'Interface Jawla de forum communautaire'), fit: 'contain', position: 'top', width: 393, height: 1906 },
+      { src: 'assets/tafrara/travel6.png', alt: bi('Jawla travel app itinerary and map interface', 'Interface Jawla d’itinéraire et carte de voyage'), fit: 'contain', position: 'top', width: 393, height: 1906 }
     ],
     technologies: ['Figma', 'UI / UX', 'Mobile prototyping', 'Journey design'],
     summary: bi('A concept for exploring Algerian destinations through places, itineraries, maps and community content.', 'Un concept pour explorer les destinations algériennes à travers lieux, itinéraires, cartes et contenus communautaires.'),
@@ -447,8 +468,11 @@ const P = [
     featured: false,
     accent: '#f04b4d',
     media: [
-      { src: 'assets/hyperco1.png', alt: bi('HYPERS & CO streetwear storefront concept', 'Concept de vitrine streetwear HYPERS & CO'), fit: 'cover', position: 'center', width: 1396, height: 813 },
-      { src: 'assets/hyperco2.png', alt: bi('HYPERS & CO retail product catalogue', 'Catalogue produit retail HYPERS & CO'), fit: 'cover', position: 'top', width: 1392, height: 891 }
+      { src: 'assets/sneakers/s1.png', alt: bi('HYPERS & CO streetwear storefront concept', 'Concept de vitrine streetwear HYPERS & CO'), fit: 'cover', position: 'center', width: 1396, height: 813 },
+      { src: 'assets/sneakers/s0.png', alt: bi('HYPERS & CO retail product catalogue', 'Catalogue produit retail HYPERS & CO'), fit: 'cover', position: 'top', width: 1392, height: 891 },
+      { src: 'assets/sneakers/s3.png', alt: bi('HYPERS & CO retail product catalogue', 'Catalogue produit retail HYPERS & CO'), fit: 'cover', position: 'top', width: 1392, height: 891 },
+      { src: 'assets/sneakers/s4.png', alt: bi('HYPERS & CO retail product catalogue', 'Catalogue produit retail HYPERS & CO'), fit: 'cover', position: 'top', width: 1392, height: 891 },
+      { src: 'assets/sneakers/s5.png', alt: bi('HYPERS & CO retail product catalogue', 'Catalogue produit retail HYPERS & CO'), fit: 'cover', position: 'top', width: 1392, height: 891 }
     ],
     technologies: [],
     summary: bi('A retail interface exploration spanning brand landing and catalogue discovery.', 'Une exploration d’interface retail allant de la vitrine de marque à la découverte du catalogue.'),
@@ -480,7 +504,7 @@ const P = [
     solution: bi('A focused portal surface for starting and navigating service requests.', 'Une interface ciblée pour initier et parcourir les demandes de service.'),
     highlights: [bi('Odoo context', 'Contexte Odoo'), bi('Customer requests', 'Réclamations client'), bi('Business application', 'Application métier')],
     liveUrl: null,
-    repoUrl: null
+    repoUrl: 'https://github.com/xwassim/Almiyah-Odoo'
   },
   {
     id: 'sciquest',
@@ -500,7 +524,7 @@ const P = [
     solution: null,
     highlights: [],
     liveUrl: null,
-    repoUrl: null,
+    repoUrl: 'https://github.com/SciQuest',
     detailsPending: true
   },
   {
@@ -541,7 +565,7 @@ const P = [
     solution: null,
     highlights: [],
     liveUrl: null,
-    repoUrl: null,
+    repoUrl: 'https://github.com/xwassim/treasury-budget-management',
     detailsPending: true
   }
 ];
