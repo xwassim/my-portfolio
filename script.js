@@ -20,6 +20,7 @@ let modalProjectId = null;
 let modalMediaIndex = 0;
 let lastFocus = null;
 const cardSlides = new Map();
+const featuredSlides = new Map();
 let suppressClickUntil = 0;
 let pointerFrame = 0;
 let latestPointerEvent = null;
@@ -102,6 +103,7 @@ const T = {
   previous: ['Previous media', 'Média précédent'],
   next: ['Next media', 'Média suivant'],
   slide: ['Show media', 'Afficher le média'],
+  media_gallery: ['Featured project media', 'Médias du projet phare'],
   no_media: ['Visual documentation in progress', 'Documentation visuelle en cours'],
   details_pending: ['Project details are being documented.', 'Les détails du projet sont en cours de documentation.'],
   cert_h: ['Certifications', 'Certifications'],
@@ -516,10 +518,25 @@ function renderStats() {
 function renderFeatured() {
   const featured = P.filter(project => project.featured).sort((a, b) => a.featuredOrder - b.featuredOrder);
   $('#featured').innerHTML = featured.map((project, index) => {
-    const media = project.media.length ? project.media.map((item, mediaIndex) => `
-      <figure class="feature-media-layer layer-${mediaIndex}" style="--media-index:${mediaIndex}">
-        ${imageMarkup(item, index === 0)}
-      </figure>`).join('') : placeholder(project);
+    const activeSlide = featuredSlides.get(project.id) || 0;
+    const hasCarousel = project.media.length > 1;
+    const media = project.media.length ? `
+      <div class="feature-track" style="--featured-slide:${activeSlide}">
+        ${project.media.map((item, mediaIndex) => `
+          <figure class="feature-media-layer${mediaIndex === activeSlide ? ' active' : ''}" aria-hidden="${mediaIndex === activeSlide ? 'false' : 'true'}">
+            ${imageMarkup(item, index === 0 && mediaIndex === 0)}
+          </figure>`).join('')}
+      </div>
+      ${hasCarousel ? `
+        <div class="feature-arrows">
+          <button type="button" data-feature-step="-1" data-project="${project.id}" aria-label="${t('previous')}">‹</button>
+          <button type="button" data-feature-step="1" data-project="${project.id}" aria-label="${t('next')}">›</button>
+        </div>
+        <div class="feature-dots" role="group" aria-label="${t('slide')}">
+          ${project.media.map((_, mediaIndex) => `<button type="button" class="${mediaIndex === activeSlide ? 'on' : ''}" data-feature-dot="${mediaIndex}" data-project="${project.id}" aria-label="${t('slide')} ${mediaIndex + 1}" aria-current="${mediaIndex === activeSlide ? 'true' : 'false'}"></button>`).join('')}
+        </div>
+      ` : ''}
+    ` : placeholder(project);
     const stats = (project.featureStats || []).map((stat, statIndex) => `
       <span class="feature-stat stat-${statIndex}" role="listitem"><b>${stat.value}</b><small>${x(stat.label)}</small></span>
     `).join('');
@@ -537,7 +554,7 @@ function renderFeatured() {
           </div>
           <div class="feature-visual">
             <div class="feature-glow" aria-hidden="true"></div>
-            <div class="feature-media">${media}</div>
+            <div class="feature-media${hasCarousel ? ' has-carousel' : ''}"${hasCarousel ? ` data-feature-carousel="${project.id}" role="region" aria-roledescription="carousel" aria-label="${project.title} · ${t('media_gallery')}" tabindex="0"` : ''}>${media}</div>
             <div class="feature-stats" role="list" aria-label="${t('highlights')}">${stats}</div>
             <p class="scene-line">${x(project.sceneLine)}</p>
           </div>
@@ -729,6 +746,29 @@ function stepCard(projectId, delta) {
   setCardSlide(projectId, current + delta);
 }
 
+function setFeaturedSlide(projectId, nextIndex) {
+  const project = projectById(projectId);
+  if (!project || project.media.length < 2) return;
+  const index = (nextIndex + project.media.length) % project.media.length;
+  featuredSlides.set(projectId, index);
+  $$(`[data-feature-carousel="${projectId}"]`).forEach(carousel => {
+    $('.feature-track', carousel).style.setProperty('--featured-slide', index);
+    $$('.feature-media-layer', carousel).forEach((slide, slideIndex) => {
+      slide.classList.toggle('active', slideIndex === index);
+      slide.setAttribute('aria-hidden', slideIndex === index ? 'false' : 'true');
+    });
+    $$('[data-feature-dot]', carousel).forEach((dot, dotIndex) => {
+      dot.classList.toggle('on', dotIndex === index);
+      dot.setAttribute('aria-current', dotIndex === index ? 'true' : 'false');
+    });
+  });
+}
+
+function stepFeatured(projectId, delta) {
+  const current = featuredSlides.get(projectId) || 0;
+  setFeaturedSlide(projectId, current + delta);
+}
+
 function modalMedia(project) {
   if (!project.media.length) return placeholder(project);
   const media = project.media[modalMediaIndex];
@@ -907,14 +947,6 @@ function updateMotion() {
     scene.style.setProperty('--feature-rotate', ((1 - progress) * 1.5) + 'deg');
     scene.style.setProperty('--stat-opacity', clamp((progress - .12) * 1.7));
     scene.style.setProperty('--stat-y', ((1 - progress) * 12) + 'px');
-    const multi = $$('.feature-media-layer', scene).length > 1;
-    scene.style.setProperty('--layer-a', 1);
-    scene.style.setProperty('--layer-b', multi ? 1 : 0);
-    scene.style.setProperty('--layer-clip', multi ? (progress * 100) + '%' : '0%');
-    scene.style.setProperty('--layer-a-x', multi ? (-progress * 28) + 'px' : '0px');
-    scene.style.setProperty('--layer-b-x', multi ? ((1 - progress) * 34) + 'px' : '0px');
-    scene.style.setProperty('--layer-a-r', multi ? (-progress * 2) + 'deg' : '0deg');
-    scene.style.setProperty('--layer-b-r', multi ? ((1 - progress) * -2) + 'deg' : '0deg');
   });
   updateMethod();
   updateRag();
@@ -927,13 +959,15 @@ function scheduleMotionUpdate() {
 }
 
 document.addEventListener('click', event => {
-  if (performance.now() < suppressClickUntil && event.target.closest('.card')) {
+  if (performance.now() < suppressClickUntil && event.target.closest('.card, .feature-media')) {
     event.preventDefault();
     event.stopPropagation();
     return;
   }
   const cardStep = event.target.closest('[data-card-step]');
   const cardDot = event.target.closest('[data-card-dot]');
+  const featuredStep = event.target.closest('[data-feature-step]');
+  const featuredDot = event.target.closest('[data-feature-dot]');
   const modalStep = event.target.closest('[data-modal-step]');
   const modalDot = event.target.closest('[data-modal-dot]');
   const filterButton = event.target.closest('[data-filter]');
@@ -944,6 +978,10 @@ document.addEventListener('click', event => {
   } else if (cardDot) {
     event.stopPropagation();
     setCardSlide(cardDot.dataset.project, Number(cardDot.dataset.cardDot));
+  } else if (featuredStep) {
+    stepFeatured(featuredStep.dataset.project, Number(featuredStep.dataset.featureStep));
+  } else if (featuredDot) {
+    setFeaturedSlide(featuredDot.dataset.project, Number(featuredDot.dataset.featureDot));
   } else if (modalStep) {
     stepModal(Number(modalStep.dataset.modalStep));
   } else if (modalDot) {
@@ -972,14 +1010,26 @@ document.addEventListener('keydown', event => {
     trapModalFocus(event);
     return;
   }
+  const featuredCarousel = event.target.closest('[data-feature-carousel]');
+  if (featuredCarousel && (event.key === 'ArrowRight' || event.key === 'ArrowLeft')) {
+    event.preventDefault();
+    stepFeatured(featuredCarousel.dataset.featureCarousel, event.key === 'ArrowRight' ? 1 : -1);
+    return;
+  }
   if (event.key === 'Escape') setMenu(false);
 });
 
 let swipeStart = null;
 document.addEventListener('pointerdown', event => {
-  const carousel = event.target.closest('[data-carousel]');
+  const carousel = event.target.closest('[data-carousel], [data-feature-carousel]');
   if (!carousel || event.target.closest('button')) return;
-  swipeStart = { id: carousel.dataset.carousel, x: event.clientX, y: event.clientY, pointerId: event.pointerId };
+  swipeStart = {
+    id: carousel.dataset.carousel || carousel.dataset.featureCarousel,
+    type: carousel.dataset.featureCarousel ? 'featured' : 'card',
+    x: event.clientX,
+    y: event.clientY,
+    pointerId: event.pointerId
+  };
 });
 document.addEventListener('pointerup', event => {
   if (!swipeStart || swipeStart.pointerId !== event.pointerId) return;
@@ -987,7 +1037,7 @@ document.addEventListener('pointerup', event => {
   const dy = event.clientY - swipeStart.y;
   if (Math.abs(dx) > 44 && Math.abs(dx) > Math.abs(dy)) {
     suppressClickUntil = performance.now() + 450;
-    stepCard(swipeStart.id, dx < 0 ? 1 : -1);
+    (swipeStart.type === 'featured' ? stepFeatured : stepCard)(swipeStart.id, dx < 0 ? 1 : -1);
   }
   swipeStart = null;
 });
