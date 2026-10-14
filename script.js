@@ -263,6 +263,9 @@ const EDUCATION = [
   }
 ];
 
+// Add future credentials here; the Certifications block stays out of the layout while empty.
+const CERTIFICATIONS = [];
+
 const P = [
   {
     id: 'pgdi',
@@ -550,7 +553,7 @@ const placeholder = project => `
     <b>${project.title.split(/[—/]/)[0].trim().slice(0, 2).toUpperCase()}</b>
     <small>${t('no_media')}</small>
   </div>`;
-const imageMarkup = (media, eager = false) => `<img src="${media.src}" alt="${x(media.alt)}" width="${media.width}" height="${media.height}" loading="${eager ? 'eager' : 'lazy'}" decoding="async" style="--fit:${media.fit || 'cover'};--position:${media.position || 'center'}">`;
+const imageMarkup = (media, eager = false) => `<img src="${media.src}" alt="${x(media.alt)}" width="${media.width}" height="${media.height}" loading="${eager ? 'eager' : 'lazy'}" decoding="async" draggable="false" style="--fit:${media.fit || 'cover'};--position:${media.position || 'center'}">`;
 
 function renderStats() {
   const stats = [[P.length, 'st1'], [5, 'st2'], [3, 'st3']];
@@ -572,12 +575,12 @@ function renderFeatured() {
           </figure>`).join('')}
       </div>
       ${hasCarousel ? `
-        <div class="feature-arrows">
-          <button type="button" data-feature-step="-1" data-project="${project.id}" aria-label="${t('previous')}">‹</button>
-          <button type="button" data-feature-step="1" data-project="${project.id}" aria-label="${t('next')}">›</button>
+        <div class="feature-arrows carousel-arrows">
+          <button class="carousel-arrow" type="button" data-feature-step="-1" data-project="${project.id}" aria-label="${t('previous')}">‹</button>
+          <button class="carousel-arrow" type="button" data-feature-step="1" data-project="${project.id}" aria-label="${t('next')}">›</button>
         </div>
-        <div class="feature-dots" role="group" aria-label="${t('slide')}">
-          ${project.media.map((_, mediaIndex) => `<button type="button" class="${mediaIndex === activeSlide ? 'on' : ''}" data-feature-dot="${mediaIndex}" data-project="${project.id}" aria-label="${t('slide')} ${mediaIndex + 1}" aria-current="${mediaIndex === activeSlide ? 'true' : 'false'}"></button>`).join('')}
+        <div class="feature-dots carousel-dots" role="group" aria-label="${t('slide')}">
+          ${project.media.map((_, mediaIndex) => `<button type="button" class="carousel-dot${mediaIndex === activeSlide ? ' active' : ''}" data-feature-dot="${mediaIndex}" data-project="${project.id}" aria-label="${t('slide')} ${mediaIndex + 1}" aria-current="${mediaIndex === activeSlide ? 'true' : 'false'}"></button>`).join('')}
         </div>
       ` : ''}
     ` : placeholder(project);
@@ -618,18 +621,19 @@ function renderFilters() {
 function cardMedia(project) {
   if (!project.media.length) return `<div class="card-media is-placeholder">${placeholder(project)}</div>`;
   const slide = cardSlides.get(project.id) || 0;
+  const hasCarousel = project.media.length > 1;
   return `
-    <div class="card-media" data-carousel="${project.id}" style="--slide:${slide};--accent:${project.accent}">
+    <div class="card-media" data-carousel="${project.id}" style="--slide:${slide};--accent:${project.accent}"${hasCarousel ? ` role="region" aria-roledescription="carousel" aria-label="${project.title} · ${t('media_gallery')}" tabindex="0"` : ''}>
       <div class="card-track">
         ${project.media.map(media => `<figure>${imageMarkup(media)}</figure>`).join('')}
       </div>
-      ${project.media.length > 1 ? `
-        <div class="card-arrows">
-          <button type="button" data-card-step="-1" data-project="${project.id}" aria-label="${t('previous')}">‹</button>
-          <button type="button" data-card-step="1" data-project="${project.id}" aria-label="${t('next')}">›</button>
+      ${hasCarousel ? `
+        <div class="card-arrows carousel-arrows">
+          <button class="carousel-arrow" type="button" data-card-step="-1" data-project="${project.id}" aria-label="${t('previous')}">‹</button>
+          <button class="carousel-arrow" type="button" data-card-step="1" data-project="${project.id}" aria-label="${t('next')}">›</button>
         </div>
-        <div class="card-dots" role="group" aria-label="${t('slide')}">
-          ${project.media.map((_, index) => `<button type="button" class="${index === slide ? 'on' : ''}" data-card-dot="${index}" data-project="${project.id}" aria-label="${t('slide')} ${index + 1}" aria-current="${index === slide ? 'true' : 'false'}"></button>`).join('')}
+        <div class="card-dots carousel-dots" role="group" aria-label="${t('slide')}">
+          ${project.media.map((_, index) => `<button type="button" class="carousel-dot${index === slide ? ' active' : ''}" data-card-dot="${index}" data-project="${project.id}" aria-label="${t('slide')} ${index + 1}" aria-current="${index === slide ? 'true' : 'false'}"></button>`).join('')}
         </div>
       ` : ''}
     </div>
@@ -710,7 +714,19 @@ function renderEducation() {
   $('#tl').innerHTML = EDUCATION.map(item => `
     <div class="rv"><small>${item.period}</small><h3>${x(item.title)}</h3><p>${x(item.text)}</p></div>
   `).join('');
-  $('#ct').innerHTML = `<h3>${t('cert_h')}</h3><p>${t('cert_p')}</p>`;
+  const certifications = $('#ct');
+  certifications.hidden = CERTIFICATIONS.length === 0;
+  certifications.innerHTML = CERTIFICATIONS.length ? `
+    <h3>${t('cert_h')}</h3>
+    <div class="cert-list">
+      ${CERTIFICATIONS.map(item => `
+        <a class="certification" href="${item.url}" target="_blank" rel="noreferrer">
+          <span><strong>${x(item.title)}</strong><small>${x(item.issuer)} · ${item.date}</small></span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      `).join('')}
+    </div>
+  ` : '';
 }
 
 function renderContact() {
@@ -760,6 +776,8 @@ function render() {
   $('#lang').textContent = L ? 'EN' : 'FR';
   $('#lang').setAttribute('aria-label', L ? 'Switch to English' : 'Passer en français');
   $$('[data-i]').forEach(element => { element.innerHTML = t(element.dataset.i); });
+  $('.transition-pin h2').setAttribute('aria-label', `${t('selected_a')} ${t('selected_b')}`);
+  $('#contact-title').setAttribute('aria-label', `${t('contact_a')} ${t('contact_b')} ${t('contact_c')}`);
   renderStats();
   renderFeatured();
   renderMarquees();
@@ -808,7 +826,7 @@ function setCardSlide(projectId, nextIndex) {
   $$(carousel).forEach(element => {
     element.style.setProperty('--slide', index);
     $$('[data-card-dot]', element).forEach((dot, dotIndex) => {
-      dot.classList.toggle('on', dotIndex === index);
+      dot.classList.toggle('active', dotIndex === index);
       dot.setAttribute('aria-current', dotIndex === index ? 'true' : 'false');
     });
   });
@@ -831,7 +849,7 @@ function setFeaturedSlide(projectId, nextIndex) {
       slide.setAttribute('aria-hidden', slideIndex === index ? 'false' : 'true');
     });
     $$('[data-feature-dot]', carousel).forEach((dot, dotIndex) => {
-      dot.classList.toggle('on', dotIndex === index);
+      dot.classList.toggle('active', dotIndex === index);
       dot.setAttribute('aria-current', dotIndex === index ? 'true' : 'false');
     });
   });
@@ -848,8 +866,8 @@ function modalMedia(project) {
   return `
     <figure class="modal-media">${imageMarkup(media, true)}</figure>
     ${project.media.length > 1 ? `
-      <button class="modal-arrow previous" type="button" data-modal-step="-1" aria-label="${t('previous')}">‹</button>
-      <button class="modal-arrow next" type="button" data-modal-step="1" aria-label="${t('next')}">›</button>
+      <button class="modal-arrow carousel-arrow previous" type="button" data-modal-step="-1" aria-label="${t('previous')}">‹</button>
+      <button class="modal-arrow carousel-arrow next" type="button" data-modal-step="1" aria-label="${t('next')}">›</button>
     ` : ''}
   `;
 }
@@ -1083,10 +1101,11 @@ document.addEventListener('keydown', event => {
     trapModalFocus(event);
     return;
   }
-  const featuredCarousel = event.target.closest('[data-feature-carousel]');
-  if (featuredCarousel && (event.key === 'ArrowRight' || event.key === 'ArrowLeft')) {
+  const carousel = event.target.closest('[data-carousel], [data-feature-carousel]');
+  if (carousel && (event.key === 'ArrowRight' || event.key === 'ArrowLeft')) {
     event.preventDefault();
-    stepFeatured(featuredCarousel.dataset.featureCarousel, event.key === 'ArrowRight' ? 1 : -1);
+    const step = carousel.dataset.featureCarousel ? stepFeatured : stepCard;
+    step(carousel.dataset.featureCarousel || carousel.dataset.carousel, event.key === 'ArrowRight' ? 1 : -1);
     return;
   }
   if (event.key === 'Escape') setMenu(false);

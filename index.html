@@ -13,6 +13,14 @@
 </head>
 <body data-theme="dark">
   <a class="skip-link" href="#main" data-i="skip"></a>
+  <svg class="svg-defs" aria-hidden="true" focusable="false">
+    <defs>
+      <filter id="glyph-outline" x="-4%" y="-8%" width="108%" height="116%" color-interpolation-filters="sRGB">
+        <feMorphology in="SourceGraphic" operator="dilate" radius="1" result="expanded"></feMorphology>
+        <feComposite in="expanded" in2="SourceGraphic" operator="out"></feComposite>
+      </filter>
+    </defs>
+  </svg>
   <div id="bar" aria-hidden="true"></div>
   <div id="glow" aria-hidden="true"></div>
 
@@ -97,7 +105,7 @@
       <div class="transition-pin rv">
         <div class="transition-orbit" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
         <p class="section-kicker" data-i="work_kicker"></p>
-        <h2><span data-i="selected_a"></span><span data-i="selected_b"></span></h2>
+        <h2><span data-i="selected_a"></span><span data-i="selected_b" data-outline aria-hidden="true"></span></h2>
         <p data-i="selected_note"></p>
       </div>
     </section>
@@ -193,12 +201,12 @@
         <h2 id="education-title" data-i="eh"></h2>
         <p class="sub" data-i="ep"></p>
       </div>
-      <div><div class="tl" id="tl"></div><div class="certs" id="ct"></div></div>
+      <div><div class="tl" id="tl"></div><div class="certs" id="ct" hidden></div></div>
     </section>
 
     <section id="contact" class="ct" aria-labelledby="contact-title">
       <p class="section-kicker rv" data-i="contact_kicker"></p>
-      <h2 id="contact-title" class="contact-display rv"><span data-i="contact_a"></span><span data-i="contact_b"></span><span data-i="contact_c"></span></h2>
+      <h2 id="contact-title" class="contact-display rv"><span data-i="contact_a"></span><span data-i="contact_b" data-outline aria-hidden="true"></span><span data-i="contact_c"></span></h2>
       <p class="sub rv" data-i="kp"></p>
       <div class="links rv" id="contact-links"></div>
     </section>
