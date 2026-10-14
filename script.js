@@ -34,6 +34,9 @@ const T = {
   n5: ['Skills', 'Compétences'],
   n6: ['Let’s talk', 'Contact'],
   open: ['Open to opportunities · Algiers', 'Ouvert aux opportunités · Alger'],
+  identity_role: ['Information systems engineer · Algiers', 'Ingénieur en systèmes d’information · Alger'],
+  core_system: ['Information systems', 'Systèmes d’information'],
+  node_ai: ['AI', 'IA'],
   h1: ['I turn business needs into', 'Je transforme les besoins métier en'],
   words: ['useful systems|smooth workflows|digital products|clear interfaces', 'systèmes utiles|workflows fluides|produits digitaux|interfaces claires'],
   lede: [
@@ -91,10 +94,13 @@ const T = {
   contact_a: ['Let’s build', 'Une idée.'],
   contact_b: ['something', 'Un besoin.'],
   contact_c: ['useful.', 'Une solution.'],
-  kp: ['Open to junior roles, internships and selected freelance missions in information systems and digital product.', 'Ouvert aux postes juniors, stages et missions freelance ciblées en systèmes d’information et produit digital.'],
-  email: ['Email address to add', 'Adresse email à ajouter'],
-  li: ['Profile URL to add', 'URL du profil à ajouter'],
-  cv: ['Résumé link to add', 'Lien du CV à ajouter'],
+  kp: ['Open to junior opportunities, information systems roles and freelance projects.', 'Ouvert aux opportunités junior, aux postes en systèmes d’information et aux missions freelance.'],
+  contact_email: ['Email', 'Email'],
+  contact_linkedin: ['LinkedIn', 'LinkedIn'],
+  contact_github: ['GitHub', 'GitHub'],
+  contact_cv: ['Download CV', 'Télécharger mon CV'],
+  email_todo: ['TODO: add the exact email address', 'TODO : ajouter l’adresse email exacte'],
+  linkedin_todo: ['TODO: add the exact profile URL', 'TODO : ajouter l’URL exacte du profil'],
   foot: ['Information systems · Processes · Digital products · Applied AI', 'Systèmes d’information · Processus · Produits digitaux · IA appliquée'],
   context: ['Context', 'Contexte'],
   challenge: ['Challenge', 'Défi'],
@@ -121,6 +127,16 @@ const T = {
   theme_dark: ['Use dark theme', 'Utiliser le thème sombre'],
   theme_light: ['Use light theme', 'Utiliser le thème clair']
 };
+
+const CONTACT = Object.freeze({
+  github: 'https://github.com/xwassim',
+  email: 'lw_cheref@esi.dz',
+  linkedin: '', // TODO: replace with the exact LinkedIn profile URL.
+  cv: Object.freeze({
+    url: 'assets/cv/Wassim-Cheref-CV.pdf',
+    available: false // TODO: set to true only after the PDF exists at the path above.
+  })
+});
 
 const bi = (en, fr) => ({ en, fr });
 const localeCode = () => (L ? 'fr' : 'en');
@@ -695,6 +711,26 @@ function renderEducation() {
   $('#ct').innerHTML = `<h3>${t('cert_h')}</h3><p>${t('cert_p')}</p>`;
 }
 
+function renderContact() {
+  $('#hero-github').href = CONTACT.github;
+  const items = [];
+  if (CONTACT.email) {
+    items.push(`<a href="mailto:${CONTACT.email}"><span>${t('contact_email')}</span><b>${CONTACT.email}</b></a>`);
+  } else {
+    items.push(`<div class="contact-item pending"><span>${t('contact_email')}</span><b>${t('email_todo')}</b></div>`);
+  }
+  if (CONTACT.linkedin) {
+    items.push(`<a href="${CONTACT.linkedin}" target="_blank" rel="noreferrer"><span>${t('contact_linkedin')}</span><b>${CONTACT.linkedin.replace(/^https?:\/\//, '')}</b></a>`);
+  } else {
+    items.push(`<div class="contact-item pending"><span>${t('contact_linkedin')}</span><b>${t('linkedin_todo')}</b></div>`);
+  }
+  items.push(`<a href="${CONTACT.github}" target="_blank" rel="noreferrer"><span>${t('contact_github')}</span><b>${CONTACT.github.replace(/^https?:\/\//, '')}</b></a>`);
+  if (CONTACT.cv.available) {
+    items.push(`<a class="contact-cv" href="${CONTACT.cv.url}" download><span>CV</span><b>${t('contact_cv')} ↓</b></a>`);
+  }
+  $('#contact-links').innerHTML = items.join('');
+}
+
 function setWordRotation() {
   const word = $('#word');
   const words = t('words').split('|');
@@ -731,6 +767,7 @@ function render() {
   renderSkills();
   renderCommunity();
   renderEducation();
+  renderContact();
   setWordRotation();
   updateMenuLabel();
   const themeValue = document.body.dataset.theme || 'dark';

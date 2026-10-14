@@ -37,11 +37,12 @@
     <section class="hero" id="top" aria-labelledby="hero-title">
       <div class="hc">
         <p class="eyebrow badge"><b aria-hidden="true"></b><span data-i="open"></span></p>
+        <p class="hero-identity"><strong>Wassim Cheref</strong><span data-i="identity_role"></span></p>
         <h1 id="hero-title"><span data-i="h1"></span><br><span id="word" class="grad"></span></h1>
         <p class="lede" data-i="lede"></p>
         <div class="cta">
           <a class="btn p" href="#work" data-i="cta"></a>
-          <a class="btn" href="https://github.com/xwassim" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+          <a class="btn" id="hero-github" href="https://github.com/xwassim" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
         </div>
         <div class="stats" id="stats" aria-label="Portfolio highlights"></div>
       </div>
@@ -75,14 +76,14 @@
             <path pathLength="1" d="M300 320 C300 408 300 486 300 562"/>
           </g>
         </svg>
-        <div class="system-node node-business" style="--depth:1;--exit-x:0;--exit-y:-82"><span>Business</span></div>
-        <div class="system-node node-process" style="--depth:2;--exit-x:-92;--exit-y:-20"><span>Process</span></div>
-        <div class="system-node node-users" style="--depth:2;--exit-x:94;--exit-y:-28"><span>Users</span></div>
-        <div class="system-node node-core" style="--depth:3;--exit-x:0;--exit-y:0"><span>W/C</span><small>Digital system</small></div>
-        <div class="system-node node-data" style="--depth:2;--exit-x:-86;--exit-y:62"><span>Data</span></div>
-        <div class="system-node node-ux" style="--depth:1;--exit-x:88;--exit-y:58"><span>UX</span></div>
-        <div class="system-node node-tech" style="--depth:2;--exit-x:0;--exit-y:92"><span>Tech</span></div>
-        <span class="orbit-label orbit-ai">AI</span>
+        <div class="system-node node-business"><span>Business</span></div>
+        <div class="system-node node-process"><span>Process</span></div>
+        <div class="system-node node-users"><span>Users</span></div>
+        <div class="system-node node-core"><span>Wassim Cheref</span><small data-i="core_system"></small></div>
+        <div class="system-node node-data"><span>Data</span></div>
+        <div class="system-node node-ai"><span data-i="node_ai"></span></div>
+        <div class="system-node node-tech"><span>Tech</span></div>
+        <span class="orbit-label orbit-ux">UX</span>
         <span class="orbit-label orbit-bi">BI</span>
         <span class="orbit-label orbit-erp">ERP</span>
         <span class="orbit-label orbit-flow">Workflow</span>
@@ -132,6 +133,8 @@
         <h2 id="about-title" data-i="ah"></h2>
         <p class="sub" data-i="ap1"></p>
         <p class="sub" data-i="ap2"></p>
+        <!-- Optional future portrait slot: add an image and remove hidden when a verified portrait is available. -->
+        <figure class="about-portrait" hidden></figure>
         <div class="facts" id="facts"></div>
       </div>
       <div class="method-track">
@@ -197,12 +200,7 @@
       <p class="section-kicker rv" data-i="contact_kicker"></p>
       <h2 id="contact-title" class="contact-display rv"><span data-i="contact_a"></span><span data-i="contact_b"></span><span data-i="contact_c"></span></h2>
       <p class="sub rv" data-i="kp"></p>
-      <div class="links rv">
-        <div class="contact-item"><span>lw_cheref@esi.dz</span><b data-i="email"></b></div>
-        <div class="contact-item"><span>LinkedIn</span><b data-i="li"></b></div>
-        <a href="https://github.com/xwassim" target="_blank" rel="noreferrer"><span>GitHub</span><b>github.com/xwassim</b></a>
-        <div class="contact-item"><span>CV</span><b data-i="cv"></b></div>
-      </div>
+      <div class="links rv" id="contact-links"></div>
     </section>
   </main>
 

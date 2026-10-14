@@ -394,6 +394,30 @@ h2 em,
   animation: availability 2s ease-out infinite;
 }
 
+.hero-identity {
+  width: fit-content;
+  margin-top: 17px;
+  display: grid;
+  gap: 3px;
+  text-transform: uppercase;
+}
+
+.hero-identity strong {
+  font: 700 .82rem/1 "Bricolage Grotesque", sans-serif;
+  letter-spacing: .14em;
+}
+
+.hero-identity span {
+  color: var(--muted);
+  font-size: .64rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+}
+
+.hero-identity + h1 {
+  margin-top: 16px;
+}
+
 h1 {
   max-width: 11ch;
   margin: 24px 0 22px;
@@ -608,8 +632,8 @@ h1 {
 .node-core {
   top: 50%;
   left: 50%;
-  min-width: 132px;
-  padding: 20px 23px;
+  min-width: 164px;
+  padding: 19px 21px;
   border-color: color-mix(in srgb, var(--cyan) 55%, var(--line));
   border-radius: 28px;
   background: linear-gradient(145deg, color-mix(in srgb, var(--primary) 24%, var(--surface)), color-mix(in srgb, var(--cyan) 12%, var(--surface)));
@@ -617,9 +641,14 @@ h1 {
   --z: 72px;
 }
 .node-core::before { left: 50%; top: -5px; translate: -50% 0; background: var(--warm); box-shadow: 0 0 18px var(--warm); }
-.node-core span { font-size: 1rem; }
+.node-core span {
+  font-size: .72rem;
+  letter-spacing: .075em;
+  white-space: nowrap;
+}
+.node-core small { font-size: .52rem; }
 .node-data { top: 73.4%; left: 22%; --z: 38px; }
-.node-ux { top: 72.8%; left: 81%; --z: 22px; }
+.node-ai { top: 72.8%; left: 81%; --z: 22px; }
 .node-tech { top: 87.8%; left: 50%; --z: 34px; }
 
 .orbit-label {
@@ -637,7 +666,7 @@ h1 {
   opacity: .82;
 }
 
-.orbit-ai { top: 22%; left: 9%; }
+.orbit-ux { top: 22%; left: 9%; }
 .orbit-bi { top: 17%; right: 15%; }
 .orbit-erp { bottom: 25%; left: 4%; }
 .orbit-flow { top: 44%; right: 1%; }
@@ -1394,6 +1423,22 @@ h1 {
   gap: 10px;
 }
 
+.about-portrait {
+  width: min(100%, 420px);
+  margin-top: 30px;
+  aspect-ratio: 4 / 5;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.about-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .facts div {
   padding: 15px 17px;
   border: 1px solid var(--line);
@@ -2003,6 +2048,17 @@ h1 {
 .links b {
   font: 600 clamp(1.1rem, 2.5vw, 1.9rem)/1.2 "Bricolage Grotesque", sans-serif;
   text-align: right;
+}
+
+.contact-item.pending b {
+  color: var(--muted);
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: clamp(.85rem, 1.5vw, 1.05rem);
+  font-weight: 500;
+}
+
+.contact-cv b {
+  color: var(--cyan);
 }
 
 footer {
@@ -2705,12 +2761,13 @@ footer {
   }
 
   .node-core {
-    min-width: 106px;
-    padding: 17px;
+    min-width: 132px;
+    padding: 15px 12px;
   }
 
   .node-core span {
-    font-size: .82rem;
+    font-size: .6rem;
+    letter-spacing: .05em;
   }
 
   .system-caption {
