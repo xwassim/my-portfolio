@@ -898,29 +898,6 @@ function updateMotion() {
   const maxScroll = document.documentElement.scrollHeight - innerHeight;
   $('#bar').style.width = (maxScroll > 0 ? scrollY / maxScroll * 100 : 0) + '%';
   $('#hd').classList.toggle('scrolled', scrollY > 24);
-  const hero = $('.hero');
-  if (hero) {
-    const heroRect = hero.getBoundingClientRect();
-    const exit = reducedMotion.matches || innerWidth <= 900 ? 0 : clamp(-heroRect.top / Math.max(heroRect.height * 0.72, 1));
-    document.documentElement.style.setProperty('--hero-exit', exit);
-    $('#hv').style.setProperty('--system-opacity', 1 - exit * .72);
-    $$('.system-node', $('#hv')).forEach(node => {
-      const exitX = Number(node.style.getPropertyValue('--exit-x')) || 0;
-      const exitY = Number(node.style.getPropertyValue('--exit-y')) || 0;
-      node.style.setProperty('--scatter-x', (exit * exitX) + 'px');
-      node.style.setProperty('--scatter-y', (exit * exitY) + 'px');
-    });
-  }
-  const transition = $('.work-transition');
-  if (transition) {
-    const rect = transition.getBoundingClientRect();
-    const progress = reducedMotion.matches ? 1 : clamp((innerHeight - rect.top) / Math.max(rect.height + innerHeight * 0.25, 1));
-    transition.style.setProperty('--transition-p', progress);
-    transition.style.setProperty('--transition-y', ((1 - progress) * 34) + 'px');
-    transition.style.setProperty('--transition-scale', .92 + progress * .08);
-    transition.style.setProperty('--transition-orbit-scale', .75 + progress * .25);
-    transition.style.setProperty('--transition-orbit-opacity', .16 + progress * .34);
-  }
   $$('.feature-scene').forEach(scene => {
     const rect = scene.getBoundingClientRect();
     const progress = reducedMotion.matches ? 0.55 : clamp((innerHeight * 0.84 - rect.top) / Math.max(rect.height - innerHeight * 0.18, 1));
