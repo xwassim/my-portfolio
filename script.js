@@ -236,7 +236,8 @@ const COMMUNITY = [
     title: 'ESI clubs',
     text: bi('Scientific clubs, events and teamwork at ESI.', 'Clubs scientifiques, événements et travail d’équipe à l’ESI.'),
     color: '#6d7cff',
-    image: 'assets/valoresi1.jpg',
+    image: 'assets/valoresi1.JPG',
+    alt: bi('ESI student club members gathered after an activity', 'Membres d’un club étudiant de l’ESI réunis après une activité'),
     symbol: 'ESI'
   },
   {
@@ -245,6 +246,7 @@ const COMMUNITY = [
     text: bi('Football, basketball and swimming: discipline, rhythm and collective progress.', 'Football, basket et natation : discipline, rythme et progression collective.'),
     color: '#2fd5ff',
     image: 'assets/sec2.jpg',
+    alt: bi('ESI student football team gathered on the field', 'Équipe étudiante de football de l’ESI réunie sur le terrain'),
     symbol: '↗'
   }
 ];

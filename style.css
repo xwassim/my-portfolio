@@ -738,6 +738,8 @@ h1 {
 .transition-pin h2 span:last-child {
   color: transparent;
   -webkit-text-stroke: 1px color-mix(in srgb, var(--text) 42%, transparent);
+  font-kerning: none;
+  letter-spacing: .055em;
   paint-order: stroke fill;
 }
 
@@ -2009,6 +2011,8 @@ h1 {
 .contact-display span:nth-child(2) {
   color: transparent;
   -webkit-text-stroke: 1px color-mix(in srgb, var(--text) 58%, transparent);
+  font-kerning: none;
+  letter-spacing: .025em;
   paint-order: stroke fill;
 }
 
@@ -2694,7 +2698,7 @@ footer {
   }
 
   .contact-display {
-    font-size: clamp(3.7rem, 15.2vw, 6.5rem);
+    font-size: clamp(2.8rem, 12.5vw, 5.8rem);
     line-height: .86;
     letter-spacing: -.02em;
   }
@@ -3004,7 +3008,7 @@ footer {
   }
 
   .contact-display {
-    font-size: 14vw;
+    font-size: 12.5vw;
   }
 }
 
