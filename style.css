@@ -1549,11 +1549,28 @@ h1 {
   border-left: 2px solid var(--cyan);
 }
 
+.ai-mode-label {
+  margin-top: 30px;
+  color: var(--cyan);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.rag-wrap > .ai-mode-label {
+  margin: 0 0 14px 18px;
+}
+
 .ai-domains {
   margin-top: 35px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
+}
+
+.ai-mode-label + .ai-domains {
+  margin-top: 12px;
 }
 
 .ai-domains div {
@@ -1651,6 +1668,74 @@ h1 {
 
 .rag-link {
   display: none;
+}
+
+.ai-interests {
+  position: relative;
+  z-index: 2;
+  grid-column: 1 / -1;
+  margin-top: 6px;
+  padding-top: 42px;
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: minmax(260px, .75fr) minmax(0, 1.25fr);
+  align-items: start;
+  gap: clamp(32px, 6vw, 82px);
+}
+
+.ai-interests-copy h3 {
+  max-width: 15ch;
+  margin-top: 12px;
+  font: 700 clamp(1.7rem, 3vw, 2.6rem)/1.03 "Bricolage Grotesque", sans-serif;
+  letter-spacing: -.04em;
+}
+
+.ai-interests-copy > p:last-child {
+  max-width: 48ch;
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+.ai-interest-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.ai-interest-card {
+  min-height: 150px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--primary) 8%, transparent), transparent 58%),
+    color-mix(in srgb, var(--bg) 38%, transparent);
+  transition: border-color .25s ease, translate .25s ease;
+}
+
+.ai-interest-card:hover,
+.ai-interest-card:focus-within {
+  border-color: color-mix(in srgb, var(--cyan) 46%, var(--line));
+  translate: 0 -3px;
+}
+
+.ai-interest-card > span {
+  color: var(--cyan);
+  font-size: .62rem;
+  font-weight: 700;
+}
+
+.ai-interest-card h4 {
+  margin-top: 21px;
+  font: 700 1.02rem/1.15 "Bricolage Grotesque", sans-serif;
+}
+
+.ai-interest-card p {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: .76rem;
+  line-height: 1.4;
 }
 
 .skills {
@@ -2435,6 +2520,10 @@ footer {
     grid-template-columns: 1fr;
   }
 
+  .ai-interests {
+    grid-template-columns: 1fr;
+  }
+
   .rag-wrap {
     max-width: 660px;
   }
@@ -2723,6 +2812,10 @@ footer {
 
   .facts,
   .ai-domains {
+    grid-template-columns: 1fr;
+  }
+
+  .ai-interest-grid {
     grid-template-columns: 1fr;
   }
 

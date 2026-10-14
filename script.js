@@ -67,8 +67,16 @@ const T = {
   ai_kicker: ['04 — AI & intelligent systems', '04 — IA & systèmes intelligents'],
   ai_h: ['AI as a <em>functional component</em>.', 'L’IA comme <em>composant fonctionnel</em>.'],
   ai_p: [
-    'I am particularly interested in integrating AI into information systems for search, document understanding, decision support and workflow assistance — not adding AI where there is no real business need.',
-    'Je m’intéresse particulièrement à l’intégration de l’IA comme composant fonctionnel des systèmes d’information : recherche, compréhension documentaire, aide à la décision et assistance aux workflows, plutôt qu’à l’ajout d’IA sans besoin métier réel.'
+    'I’m particularly interested in AI as a functional component of information systems — from document intelligence and retrieval to agentic workflows, decision support and process automation.',
+    'Je m’intéresse particulièrement à l’IA comme composant fonctionnel des systèmes d’information — de l’intelligence documentaire et la recherche jusqu’aux workflows agentiques, à l’aide à la décision et à l’automatisation des processus.'
+  ],
+  ai_applied: ['Applied / hands-on', 'Appliqué / mis en œuvre'],
+  ai_pipeline: ['Concrete experience · RAG pipeline', 'Expérience concrète · Pipeline RAG'],
+  ai_interests_kicker: ['Current interests / exploring', 'Intérêts actuels / exploration'],
+  ai_interests_h: ['Beyond retrieval: AI that supports work.', 'Au-delà de la recherche : une IA au service du travail.'],
+  ai_interests_p: [
+    'Areas I am exploring as extensions of useful, governed information systems — not claims of mastered expertise.',
+    'Des directions que j’explore comme extensions de systèmes d’information utiles et gouvernés — sans prétendre à une expertise déjà maîtrisée.'
   ],
   skills_kicker: ['05 — Capabilities', '05 — Compétences'],
   sh: ['A connected <em>toolkit</em>', 'Une boîte à outils <em>connectée</em>'],
@@ -169,8 +177,26 @@ const SKILLS = [
 const AI_DOMAINS = [
   { title: bi('Document intelligence', 'Intelligence documentaire'), text: 'RAG · OCR · Summarization' },
   { title: bi('Retrieval', 'Recherche'), text: 'Embeddings · Vector Search · Elasticsearch' },
-  { title: bi('Assistants', 'Assistants'), text: 'Question answering · Source grounding' },
-  { title: bi('Architecture', 'Architecture'), text: 'API · Local AI · Privacy considerations' }
+  { title: bi('Document assistants', 'Assistants documentaires'), text: 'Grounded Q&A · Source grounding' },
+  { title: bi('Private AI considerations', 'Considérations IA privée'), text: 'Local AI · Privacy · API' }
+];
+const AI_INTERESTS = [
+  {
+    title: bi('Agentic systems', 'Systèmes agentiques'),
+    text: bi('Agents · Tool use · Multi-step tasks', 'Agents · Utilisation d’outils · Tâches multi-étapes')
+  },
+  {
+    title: bi('Workflow augmentation', 'Augmentation des workflows'),
+    text: bi('Business processes · Automation · Assistance', 'Processus métier · Automatisation · Assistance')
+  },
+  {
+    title: bi('Decision support', 'Aide à la décision'),
+    text: bi('Contextual assistance · Information synthesis', 'Assistance contextuelle · Synthèse d’information')
+  },
+  {
+    title: bi('Reliable AI', 'IA fiable'),
+    text: bi('Evaluation · Grounding · Human-in-the-loop · Guardrails', 'Évaluation · Ancrage · Humain dans la boucle · Garde-fous')
+  }
 ];
 const RAG_STEPS = [
   bi('Documents', 'Documents'),
@@ -630,6 +656,14 @@ function renderAI() {
       <span>0${index + 1}</span><b>${x(step)}</b>
     </div>
     ${index < RAG_STEPS.length - 1 ? '<i class="rag-link" aria-hidden="true"></i>' : ''}
+  `).join('');
+  $('#rag-pipeline').setAttribute('aria-label', t('ai_pipeline'));
+  $('#ai-interests').innerHTML = AI_INTERESTS.map((item, index) => `
+    <article class="ai-interest-card">
+      <span>0${index + 1}</span>
+      <h4>${x(item.title)}</h4>
+      <p>${x(item.text)}</p>
+    </article>
   `).join('');
 }
 
