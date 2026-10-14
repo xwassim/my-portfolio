@@ -89,7 +89,7 @@ const T = {
   cp: ['Volunteering, student life and sport: experiences that shape how I collaborate.', 'Bénévolat, vie étudiante et sport : des expériences qui façonnent ma manière de collaborer.'],
   education_kicker: ['07 — Background', '07 — Parcours'],
   eh: ['Education & <em>credentials</em>', 'Formation & <em>certifications</em>'],
-  ep: ['The academic path behind the work, with room for verified credentials as they are added.', 'Le parcours académique derrière les projets, avec de la place pour les certifications vérifiées à venir.'],
+  ep: ['The academic path behind the work.', 'Le parcours académique derrière les projets.'],
   contact_kicker: ['08 — Start a conversation', '08 — Commençons'],
   contact_a: ['Let’s build', 'Une idée.'],
   contact_b: ['something', 'Un besoin.'],
@@ -131,10 +131,10 @@ const T = {
 const CONTACT = Object.freeze({
   github: 'https://github.com/xwassim',
   email: 'lw_cheref@esi.dz',
-  linkedin: '', // TODO: replace with the exact LinkedIn profile URL.
+  linkedin: 'https://www.linkedin.com/in/cheref-wassim-67769b363 ', 
   cv: Object.freeze({
-    url: 'assets/cv/Wassim-Cheref-CV.pdf',
-    available: false // TODO: set to true only after the PDF exists at the path above.
+    url: 'assets/cv/Wassim_Cheref_CV.pdf',
+    available: true // TODO: set to true only after the PDF exists at the path above.
   })
 });
 
